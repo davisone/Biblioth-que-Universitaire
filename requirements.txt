@@ -1,0 +1,15 @@
+# Dépendances pour le projet TP_python
+# Installation : pip install -r requirements.txt
+
+# Base de données PostgreSQL
+psycopg2-binary==2.9.11
+
+# ORM SQLAlchemy
+sqlalchemy==2.0.45
+
+# Chargement des variables d'environnement depuis .env
+python-dotenv==1.0.0
+
+# Interface graphique web
+streamlit==1.52.2
+pandas==2.3.3
