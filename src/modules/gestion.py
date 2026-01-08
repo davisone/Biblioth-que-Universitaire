@@ -14,32 +14,32 @@ from src.crud_orm import (
 def afficher():
     """Affiche la page de gestion CRUD"""
 
-    st.header("⚙️ Gestion CRUD - Créer, Modifier, Supprimer")
+    st.header("Gestion CRUD - Créer, Modifier, Supprimer")
 
     # Choix de l'entité à gérer
     entite = st.selectbox(
         "Que voulez-vous gérer ?",
-        ["📚 Livres", "👨‍🎓 Étudiants", "📖 Emprunts"]
+        ["Livres", "Étudiants", "Emprunts"]
     )
 
     st.markdown("---")
 
-    if entite == "📚 Livres":
+    if entite == "Livres":
         gerer_livres()
-    elif entite == "👨‍🎓 Étudiants":
+    elif entite == "Étudiants":
         gerer_etudiants()
-    elif entite == "📖 Emprunts":
+    elif entite == "Emprunts":
         gerer_emprunts()
 
 
 def gerer_livres():
     """Gestion CRUD des livres"""
 
-    operation = st.radio("Opération", ["➕ Ajouter", "✏️ Modifier", "🗑️ Supprimer"], horizontal=True)
+    operation = st.radio("Opération", ["Ajouter", "Modifier", "Supprimer"], horizontal=True)
 
     st.markdown("---")
 
-    if operation == "➕ Ajouter":
+    if operation == "Ajouter":
         st.subheader("Ajouter un nouveau livre")
 
         with st.form("form_ajouter_livre"):
@@ -49,21 +49,21 @@ def gerer_livres():
             annee = st.number_input("Année *", min_value=1900, max_value=2030, value=2024)
             exemplaires = st.number_input("Nombre d'exemplaires *", min_value=1, value=1)
 
-            submitted = st.form_submit_button("✅ Ajouter le livre")
+            submitted = st.form_submit_button("Ajouter le livre")
 
             if submitted:
                 if not isbn or not titre or not editeur:
-                    st.error("⚠️ Tous les champs marqués * sont obligatoires !")
+                    st.error("Tous les champs marqués * sont obligatoires !")
                 else:
                     try:
                         session = get_session()
                         create_livre(session, isbn, titre, editeur, annee, exemplaires)
                         session.close()
-                        st.success(f"✅ Livre '{titre}' ajouté avec succès !")
+                        st.success(f"Livre '{titre}' ajouté avec succès !")
                     except Exception as e:
-                        st.error(f"❌ Erreur : {str(e)}")
+                        st.error(f"Erreur : {str(e)}")
 
-    elif operation == "✏️ Modifier":
+    elif operation == "Modifier":
         st.subheader("Modifier un livre")
 
         session = get_session()
@@ -85,7 +85,7 @@ def gerer_livres():
                 nouveau_titre = st.text_input("Nouveau titre (optionnel)")
                 nouveaux_exemplaires = st.number_input("Nouveau nombre d'exemplaires (optionnel)", min_value=0)
 
-                submitted = st.form_submit_button("✅ Modifier")
+                submitted = st.form_submit_button("Modifier")
 
                 if submitted:
                     try:
@@ -97,14 +97,14 @@ def gerer_livres():
                             nouveaux_exemplaires if nouveaux_exemplaires > 0 else None
                         )
                         session.close()
-                        st.success("✅ Livre modifié avec succès !")
+                        st.success("Livre modifié avec succès !")
                         st.rerun()
                     except Exception as e:
-                        st.error(f"❌ Erreur : {str(e)}")
+                        st.error(f"Erreur : {str(e)}")
 
     else:  # Supprimer
         st.subheader("Supprimer un livre")
-        st.warning("⚠️ Attention : Cette action est irréversible !")
+        st.warning("Attention : Cette action est irréversible !")
 
         session = get_session()
         livres = get_all_livres(session)
@@ -120,25 +120,25 @@ def gerer_livres():
             format_func=lambda x: x[1]
         )
 
-        if livre_choisi and st.button("🗑️ Confirmer la suppression", type="primary"):
+        if livre_choisi and st.button("Confirmer la suppression", type="primary"):
             try:
                 session = get_session()
                 delete_livre(session, livre_choisi[0])
                 session.close()
-                st.success("✅ Livre supprimé !")
+                st.success("Livre supprimé !")
                 st.rerun()
             except Exception as e:
-                st.error(f"❌ Erreur : {str(e)}")
+                st.error(f"Erreur : {str(e)}")
 
 
 def gerer_etudiants():
     """Gestion CRUD des étudiants"""
 
-    operation = st.radio("Opération", ["➕ Ajouter", "✏️ Modifier", "🗑️ Supprimer"], horizontal=True)
+    operation = st.radio("Opération", ["Ajouter", "Modifier", "Supprimer"], horizontal=True)
 
     st.markdown("---")
 
-    if operation == "➕ Ajouter":
+    if operation == "Ajouter":
         st.subheader("Ajouter un nouvel étudiant")
 
         with st.form("form_ajouter_etudiant"):
@@ -148,23 +148,23 @@ def gerer_etudiants():
             date_inscription = st.date_input("Date d'inscription", value=date.today())
             solde_amende = st.number_input("Solde amende", min_value=0.0, value=0.0, step=0.5)
 
-            submitted = st.form_submit_button("✅ Ajouter l'étudiant")
+            submitted = st.form_submit_button("Ajouter l'étudiant")
 
             if submitted:
                 if not nom or not prenom or not email:
-                    st.error("⚠️ Tous les champs marqués * sont obligatoires !")
+                    st.error("Tous les champs marqués * sont obligatoires !")
                 else:
                     try:
                         session = get_session()
                         create_etu(session, nom, prenom, email, date_inscription, solde_amende)
                         session.close()
-                        st.success(f"✅ Étudiant {prenom} {nom} ajouté avec succès !")
+                        st.success(f"Étudiant {prenom} {nom} ajouté avec succès !")
                     except Exception as e:
-                        st.error(f"❌ Erreur : {str(e)}")
+                        st.error(f"Erreur : {str(e)}")
 
-    elif operation == "✏️ Modifier":
+    elif operation == "Modifier":
         st.subheader("Modifier un étudiant")
-        st.info("📝 Actuellement, seul le prénom peut être modifié")
+        st.info("Actuellement, seul le prénom peut être modifié")
 
         session = get_session()
         etudiants = get_all_etudiants(session)
@@ -184,24 +184,24 @@ def gerer_etudiants():
             with st.form("form_modifier_etudiant"):
                 nouveau_prenom = st.text_input("Nouveau prénom *")
 
-                submitted = st.form_submit_button("✅ Modifier")
+                submitted = st.form_submit_button("Modifier")
 
                 if submitted:
                     if not nouveau_prenom:
-                        st.error("⚠️ Le nouveau prénom est obligatoire !")
+                        st.error("Le nouveau prénom est obligatoire !")
                     else:
                         try:
                             session = get_session()
                             update_etu(session, etudiant_choisi[0], nouveau_prenom)
                             session.close()
-                            st.success("✅ Étudiant modifié avec succès !")
+                            st.success("Étudiant modifié avec succès !")
                             st.rerun()
                         except Exception as e:
-                            st.error(f"❌ Erreur : {str(e)}")
+                            st.error(f"Erreur : {str(e)}")
 
     else:  # Supprimer
         st.subheader("Supprimer un étudiant")
-        st.warning("⚠️ Attention : Cette action est irréversible !")
+        st.warning("Attention : Cette action est irréversible !")
 
         session = get_session()
         etudiants = get_all_etudiants(session)
@@ -217,25 +217,25 @@ def gerer_etudiants():
             format_func=lambda x: x[1]
         )
 
-        if etudiant_choisi and st.button("🗑️ Confirmer la suppression", type="primary"):
+        if etudiant_choisi and st.button("Confirmer la suppression", type="primary"):
             try:
                 session = get_session()
                 delete_etu(session, etudiant_choisi[0])
                 session.close()
-                st.success("✅ Étudiant supprimé !")
+                st.success("Étudiant supprimé !")
                 st.rerun()
             except Exception as e:
-                st.error(f"❌ Erreur : {str(e)}")
+                st.error(f"Erreur : {str(e)}")
 
 
 def gerer_emprunts():
     """Gestion CRUD des emprunts"""
 
-    operation = st.radio("Opération", ["➕ Créer un emprunt", "🔙 Retourner un livre"], horizontal=True)
+    operation = st.radio("Opération", ["Créer un emprunt", "Retourner un livre"], horizontal=True)
 
     st.markdown("---")
 
-    if operation == "➕ Créer un emprunt":
+    if operation == "Créer un emprunt":
         st.subheader("Créer un nouvel emprunt")
 
         session = get_session()
@@ -264,16 +264,16 @@ def gerer_emprunts():
                 format_func=lambda x: x[1]
             )
 
-            submitted = st.form_submit_button("✅ Créer l'emprunt")
+            submitted = st.form_submit_button("Créer l'emprunt")
 
             if submitted:
                 try:
                     session = get_session()
                     create_emprunt(session, etudiant_choisi[0], livre_choisi[0])
                     session.close()
-                    st.success("✅ Emprunt créé avec succès !")
+                    st.success("Emprunt créé avec succès !")
                 except Exception as e:
-                    st.error(f"❌ Erreur : {str(e)}")
+                    st.error(f"Erreur : {str(e)}")
 
     else:  # Retourner un livre
         st.subheader("Retourner un livre emprunté")
@@ -282,7 +282,7 @@ def gerer_emprunts():
         emprunts_actifs = get_emprunts_actifs(session)
 
         if not emprunts_actifs:
-            st.info("🎉 Aucun emprunt en cours ! Tous les livres ont été retournés.")
+            st.info("Aucun emprunt en cours ! Tous les livres ont été retournés.")
             session.close()
             return
 
@@ -302,12 +302,12 @@ def gerer_emprunts():
             format_func=lambda x: x[1]
         )
 
-        if emprunt_choisi and st.button("🔙 Confirmer le retour", type="primary"):
+        if emprunt_choisi and st.button("Confirmer le retour", type="primary"):
             try:
                 session = get_session()
                 retourner_livre(session, emprunt_choisi[0])
                 session.close()
-                st.success("✅ Livre retourné avec succès !")
+                st.success("Livre retourné avec succès !")
                 st.rerun()
             except Exception as e:
-                st.error(f"❌ Erreur : {str(e)}")
+                st.error(f"Erreur : {str(e)}")

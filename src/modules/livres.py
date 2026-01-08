@@ -8,7 +8,7 @@ from src.utils import executer_requete_sql, convertir_en_tableau
 def afficher():
     """Affiche la page du catalogue des livres"""
 
-    st.header("📚 Catalogue des livres")
+    st.header("Catalogue des livres")
 
     # Case à cocher pour filtrer les livres disponibles
     afficher_seulement_disponibles = st.checkbox(
@@ -46,6 +46,6 @@ def afficher():
             width='stretch',
             height=500
         )
-        st.success(f"✅ {len(tableau_livres)} livre(s) trouvé(s)")
+        st.success(f"{len(tableau_livres)} livre(s) trouvé(s)")
     else:
-        st.warning("⚠️ Aucun livre trouvé")
+        st.warning("Aucun livre trouvé")

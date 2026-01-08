@@ -5,9 +5,6 @@ TEST DES FONCTIONS CRUD
 
 Ce fichier montre comment utiliser les fonctions CRUD avec SQLAlchemy ORM
 
-Pour l'exécuter :
-    python test_crud.py
-
 =============================================================================
 """
 
@@ -44,43 +41,43 @@ def test_crud_etudiant():
             date_inscription=date.today(),
             solde_amende=0
         )
-        print(f"   ✅ Étudiant créé avec l'ID : {id_etudiant}")
+        print(f"   Étudiant créé avec l'ID : {id_etudiant}")
 
         # ===== READ =====
         print("\n2️⃣ READ : Lire les informations de l'étudiant")
         etudiant = read_etu(session, "Martin")
         if etudiant:
-            print(f"   ✅ Trouvé : {etudiant.prenom} {etudiant.nom}")
+            print(f"   Trouvé : {etudiant.prenom} {etudiant.nom}")
             print(f"      Email : {etudiant.email}")
             print(f"      ID : {etudiant.id_etud}")
         else:
-            print("   ❌ Étudiant non trouvé")
+            print("   Étudiant non trouvé")
 
         # ===== UPDATE =====
         print("\n3️⃣ UPDATE : Modifier le prénom")
         succes = update_etu(session, id_etudiant, "Marie")
         if succes:
-            print("   ✅ Prénom modifié avec succès")
+            print("   Prénom modifié avec succès")
             # Vérifier la modification
             etudiant = session.query(Etudiant).get(id_etudiant)
             print(f"      Nouveau prénom : {etudiant.prenom}")
         else:
-            print("   ❌ Modification échouée")
+            print("   Modification échouée")
 
         # ===== DELETE =====
         print("\n4️⃣ DELETE : Supprimer l'étudiant")
         succes = delete_etu(session, "Martin")
         if succes:
-            print("   ✅ Étudiant supprimé avec succès")
+            print("   Étudiant supprimé avec succès")
         else:
-            print("   ❌ Suppression échouée")
+            print("   Suppression échouée")
 
         print("\n" + "="*60)
-        print("✅ Tous les tests CRUD pour les étudiants ont réussi !")
+        print("Tous les tests CRUD pour les étudiants ont réussi !")
         print("="*60)
 
     except Exception as e:
-        print(f"\n❌ Erreur lors des tests : {e}")
+        print(f"\nErreur lors des tests : {e}")
         session.rollback()
 
     finally:
@@ -110,42 +107,42 @@ def test_crud_livre():
             annee=2026,
             exemplaires_dispo=5
         )
-        print(f"   ✅ Livre créé avec l'ISBN : {isbn}")
+        print(f"   Livre créé avec l'ISBN : {isbn}")
 
         # ===== READ =====
         print("\n2️⃣ READ : Lire les informations du livre")
         livre = read_livre(session, "9789999999999")
         if livre:
-            print(f"   ✅ Trouvé : {livre.titre}")
+            print(f"   Trouvé : {livre.titre}")
             print(f"      Éditeur : {livre.editeur}")
             print(f"      Exemplaires : {livre.exemplaires_dispo}")
         else:
-            print("   ❌ Livre non trouvé")
+            print("   Livre non trouvé")
 
         # ===== UPDATE =====
         print("\n3️⃣ UPDATE : Modifier le nombre d'exemplaires")
         succes = update_livre(session, "9789999999999", nouveaux_exemplaires=10)
         if succes:
-            print("   ✅ Livre modifié avec succès")
+            print("   Livre modifié avec succès")
             livre = read_livre(session, "9789999999999")
             print(f"      Nouveaux exemplaires : {livre.exemplaires_dispo}")
         else:
-            print("   ❌ Modification échouée")
+            print("   Modification échouée")
 
         # ===== DELETE =====
         print("\n4️⃣ DELETE : Supprimer le livre")
         succes = delete_livre(session, "9789999999999")
         if succes:
-            print("   ✅ Livre supprimé avec succès")
+            print("   Livre supprimé avec succès")
         else:
-            print("   ❌ Suppression échouée")
+            print("   Suppression échouée")
 
         print("\n" + "="*60)
-        print("✅ Tous les tests CRUD pour les livres ont réussi !")
+        print("Tous les tests CRUD pour les livres ont réussi !")
         print("="*60)
 
     except Exception as e:
-        print(f"\n❌ Erreur lors des tests : {e}")
+        print(f"\nErreur lors des tests : {e}")
         session.rollback()
 
     finally:
@@ -174,7 +171,7 @@ def afficher_tous_les_etudiants():
             print("  Aucun étudiant trouvé")
 
     except Exception as e:
-        print(f"❌ Erreur : {e}")
+        print(f"Erreur : {e}")
 
     finally:
         session.close()
@@ -196,4 +193,4 @@ if __name__ == "__main__":
     test_crud_livre()
     afficher_tous_les_etudiants()
 
-    print("\n\n✅ Tous les tests sont terminés !\n")
+    print("\n\nTous les tests sont terminés !\n")

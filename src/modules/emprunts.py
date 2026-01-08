@@ -8,7 +8,7 @@ from src.utils import executer_requete_sql, convertir_en_tableau
 def afficher():
     """Affiche la page de gestion des emprunts"""
 
-    st.header("📖 Gestion des emprunts")
+    st.header("Gestion des emprunts")
 
     # Filtre
     afficher_seulement_actifs = st.checkbox(
@@ -55,9 +55,9 @@ def afficher():
 
     if not tableau_emprunts.empty:
         st.dataframe(tableau_emprunts, width='stretch', height=500)
-        st.success(f"✅ {len(tableau_emprunts)} emprunt(s) trouvé(s)")
+        st.success(f"{len(tableau_emprunts)} emprunt(s) trouvé(s)")
     else:
         if afficher_seulement_actifs:
-            st.info("🎉 Aucun emprunt en cours ! Tous les livres ont été retournés.")
+            st.info("Aucun emprunt en cours - Tous les livres ont été retournés")
         else:
-            st.warning("⚠️ Aucun emprunt trouvé dans la base de données")
+            st.warning("Aucun emprunt trouvé dans la base de données")

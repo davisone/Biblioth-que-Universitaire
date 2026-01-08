@@ -8,7 +8,7 @@ from src.utils import executer_requete_sql, convertir_en_tableau
 def afficher():
     """Affiche la page de gestion des amendes"""
 
-    st.header("💰 Gestion des amendes")
+    st.header("Gestion des amendes")
 
     # Requête SQL - seulement les étudiants avec amendes
     requete = """
@@ -34,10 +34,10 @@ def afficher():
             "SELECT SUM(solde_amende) FROM etudiant WHERE solde_amende > 0;"
         )
         st.metric(
-            label="💵 Total des amendes à collecter",
+            label="Total des amendes à collecter",
             value=f"{total}€"
         )
 
-        st.success(f"✅ {len(tableau_amendes)} étudiant(s) avec des amendes")
+        st.success(f"{len(tableau_amendes)} étudiant(s) avec des amendes")
     else:
-        st.success("🎉 Excellent ! Aucune amende en cours.")
+        st.success("Excellent - Aucune amende en cours")

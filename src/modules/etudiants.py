@@ -8,7 +8,7 @@ from src.utils import executer_requete_sql, convertir_en_tableau
 def afficher():
     """Affiche la page de la liste des étudiants"""
 
-    st.header("👨‍🎓 Liste des étudiants")
+    st.header("Liste des étudiants")
 
     # Filtre
     afficher_seulement_amendes = st.checkbox(
@@ -39,6 +39,6 @@ def afficher():
 
     if not tableau_etudiants.empty:
         st.dataframe(tableau_etudiants, width='stretch', height=500)
-        st.success(f"✅ {len(tableau_etudiants)} étudiant(s) trouvé(s)")
+        st.success(f"{len(tableau_etudiants)} étudiant(s) trouvé(s)")
     else:
-        st.warning("⚠️ Aucun étudiant trouvé")
+        st.warning("Aucun étudiant trouvé")

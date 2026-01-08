@@ -23,22 +23,22 @@ def creer_tables():
     """
     Crée toutes les tables dans la base de données
     """
-    print("📝 Création des tables...")
+    print("Création des tables...")
     engine = get_engine()
     Base.metadata.create_all(engine)
-    print("✅ Tables créées avec succès !")
+    print("Tables créées avec succès !")
 
 
 def inserer_donnees_test():
     """
     Insère des données de test dans la base
     """
-    print("\n📝 Insertion des données de test...")
+    print("\nInsertion des données de test...")
     session = get_session()
 
     try:
         # ===== ÉTUDIANTS =====
-        print("\n👨‍🎓 Ajout des étudiants...")
+        print("\nAjout des étudiants...")
         etudiants_data = [
             ("Davison", "Evan", "evan.davison@supdevinci-edu.fr"),
             ("Bernard", "Thomas", "thomas.bernard@univ.fr"),
@@ -49,10 +49,10 @@ def inserer_donnees_test():
 
         for nom, prenom, email in etudiants_data:
             create_etu(session, nom, prenom, email, date.today(), 0)
-            print(f"   ✅ {prenom} {nom}")
+            print(f"   {prenom} {nom}")
 
         # ===== LIVRES =====
-        print("\n📚 Ajout des livres...")
+        print("\nAjout des livres...")
         livres_data = [
             ("9782212678529", "Clean Code", "Pearson", 2008, 3),
             ("9781449355739", "Learning Python", "O'Reilly", 2013, 2),
@@ -63,12 +63,12 @@ def inserer_donnees_test():
 
         for isbn, titre, editeur, annee, exemplaires in livres_data:
             create_livre(session, isbn, titre, editeur, annee, exemplaires)
-            print(f"   ✅ {titre}")
+            print(f"   {titre}")
 
-        print("\n✅ Données insérées avec succès !")
+        print("\nDonnées insérées avec succès !")
 
     except Exception as e:
-        print(f"❌ Erreur : {e}")
+        print(f"Erreur : {e}")
         session.rollback()
 
     finally:
@@ -85,4 +85,4 @@ if __name__ == "__main__":
     creer_tables()
     inserer_donnees_test()
 
-    print("\n✅ Initialisation terminée !\n")
+    print("\nInitialisation terminée !\n")

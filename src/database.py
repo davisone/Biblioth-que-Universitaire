@@ -20,7 +20,6 @@ DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NA
 def get_engine():
     """
     Crée et retourne le moteur de base de données SQLAlchemy
-
     Le moteur gère la connexion à PostgreSQL
     """
     engine = create_engine(
