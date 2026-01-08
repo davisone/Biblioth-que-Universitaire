@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Import des différents modules de pages
-from src.modules import accueil, livres, etudiants, emprunts, amendes
+from src.modules import accueil, livres, etudiants, emprunts, amendes, gestion
 
 
 # ============ CONFIGURATION DE LA PAGE WEB ============
@@ -41,7 +41,8 @@ page_selectionnee = st.sidebar.radio(
         "📚 Livres",
         "👨‍🎓 Étudiants",
         "📖 Emprunts",
-        "💰 Amendes"
+        "💰 Amendes",
+        "⚙️ Gestion CRUD"
     ]
 )
 
@@ -61,6 +62,9 @@ elif page_selectionnee == "📖 Emprunts":
 
 elif page_selectionnee == "💰 Amendes":
     amendes.afficher()
+
+elif page_selectionnee == "⚙️ Gestion CRUD":
+    gestion.afficher()
 
 
 # ============ PIED DE PAGE ============

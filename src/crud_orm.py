@@ -6,14 +6,22 @@ from datetime import date
 # ============================================================
 
 def create_etu(session, nom, prenom, email, date_inscription, solde_amende):
+    etu = Etudiant(
+        nom=nom,
+        prenom=prenom,
+        email=email,
+        date_inscription=date_inscription,
+        solde_amende=solde_amende
+    )
+    session.add(etu)
+    session.commit()
+    return etu.id_etud
 
 def read_etu(session, nom):
-
-return session.query(Etudiant).filter_by(nom=nom).first()
+    return session.query(Etudiant).filter_by(nom=nom).first()
 
 def update_etu(session, id_etud, nouveau_prenom):
-    
-etu = session.query(Etudiant).get(id_etud)
+    etu = session.query(Etudiant).get(id_etud)
 
     if etu:
         # On modifie le prénom
