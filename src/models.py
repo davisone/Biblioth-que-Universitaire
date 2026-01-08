@@ -9,7 +9,6 @@ Base = declarative_base()
 
 # ============ MODÈLE ÉTUDIANT ============
 class Etudiant(Base):
-    # Nom de la table en base de données
     __tablename__ = 'etudiant'
 
     # Les colonnes de la table
